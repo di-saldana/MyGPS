@@ -4,6 +4,7 @@
     <string name="gps_text_view">My current location is:</string>
     <string name="lat">Latitude =</string>
     <string name="lon">Longitude =</string>
-    <string name="lat_res">0,0</string>
-    <string name="lon_res">0,0</string>
+    <string name="lat_res">0.0</string>
+    <string name="lon_res">0.0</string>
+    <string name="error">Current location not available</string>
 </resources>
