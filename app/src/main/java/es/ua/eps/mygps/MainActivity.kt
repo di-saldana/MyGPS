@@ -2,77 +2,48 @@ package es.ua.eps.mygps
 
 import android.Manifest
 import android.content.Context
-import android.content.pm.PackageManager
-import android.location.LocationManager
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import android.telephony.TelephonyManager
+import android.telephony.gsm.GsmCellLocation
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var locationTextView: TextView
-    private lateinit var lonResText: TextView
-    private lateinit var latResText: TextView
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //  Telephony Manager & GmsCellLocation
+        val iccidText = findViewById<TextView>(R.id.iccidText)
+        val imsiText = findViewById<TextView>(R.id.imsiText)
+        val operatorNameText = findViewById<TextView>(R.id.operatorNameText)
+        val networkTypeText = findViewById<TextView>(R.id.networkTypeText)
+        val imeiText = findViewById<TextView>(R.id.imeiText)
+        val cellIdText = findViewById<TextView>(R.id.cellIdText)
+        val lacText = findViewById<TextView>(R.id.lacText)
 
-        locationTextView = findViewById(R.id.locationText)
-        lonResText = findViewById(R.id.lonResText)
-        latResText = findViewById(R.id.latResText)
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        val telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        val cellLocation = telephonyManager.cellLocation as GsmCellLocation
 
-        if (checkLocationPermission()) {
-            requestLocationUpdates()
-        }
-    }
+        val simSerialNumber = telephonyManager.simSerialNumber
+        iccidText.text = "ICCID (Sim Serial Number): $simSerialNumber"
 
-    private fun isLocationEnabled(): Boolean {
-        val locationManager: LocationManager =
-            getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-            LocationManager.NETWORK_PROVIDER
-        )
-    }
+        val subscriberId = telephonyManager.subscriberId
+        imsiText.text = "IMSI (Subscriber ID): $subscriberId"
 
-    private fun checkLocationPermission(): Boolean {
-        val permission = Manifest.permission.ACCESS_FINE_LOCATION
-        val granted = PackageManager.PERMISSION_GRANTED
+        val operatorName = telephonyManager.networkOperatorName
+        operatorNameText.text = "Operator Name: $operatorName"
 
-        if (ContextCompat.checkSelfPermission(this, permission) != granted) {
-            ActivityCompat.requestPermissions(this, arrayOf(permission), 1)
-            return false
-        }
-        return true
-    }
+        val networkType = telephonyManager.networkType
+        networkTypeText.text = "Network Type: $networkType"
 
-    private fun requestLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            return
-        }
+        val imei = telephonyManager.imei
+        imeiText.text = "IMEI (Device ID): $imei"
 
-        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-            if (location != null) {
-                val latitude = location.latitude
-                val longitude = location.longitude
-                lonResText.text = "$longitude"
-                latResText.text = "$latitude"
-            } else {
-                locationTextView.text = getString(R.string.error)
-            }
-        }
+        val cellId = cellLocation.cid
+        cellIdText.text = "Cell ID: $cellId"
+
+        val lac = cellLocation.lac
+        lacText.text = "LAC (Location Area Code): $lac"
     }
 }

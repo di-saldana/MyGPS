@@ -3,79 +3,103 @@
     android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A7FFEB"
-    android:isScrollContainer="false"
-    android:scrollbarAlwaysDrawHorizontalTrack="true"
-    android:scrollbarAlwaysDrawVerticalTrack="true">
-
-    <TextView
-        android:id="@+id/locationText"
-        android:layout_width="400dp"
-        android:layout_height="70dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="170dp"
-        android:gravity="center|center_horizontal|center_vertical"
-        android:text="@string/gps_text_view"
-        android:textAlignment="center"
-        android:textColor="#077C28"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+    android:background="@color/white"
+    android:isScrollContainer="false">
 
     <LinearLayout
-        android:id="@+id/boxLat"
+        android:id="@+id/boxTelephony"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/locationText"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:layout_marginTop="50dp">
 
         <TextView
-            android:id="@+id/latText"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/lat"
-            android:textColor="#000000"
-            android:textSize="20sp" />
+            android:id="@+id/telephonyText"
+            android:layout_width="400dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="4dp"
+            android:gravity="center|center_horizontal|center_vertical"
+            android:text="@string/telephony"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/latResText"
-            android:layout_width="wrap_content"
+            android:id="@+id/iccidText"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="@string/lat_res"
+            android:text="ICCID (Sim Serial Number):"
             android:textColor="#000000"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/boxLon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/boxLat"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal">
+            android:textSize="20sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="50dp"/>
 
         <TextView
-            android:id="@+id/lonText"
-            android:layout_width="110dp"
+            android:id="@+id/imsiText"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/lon"
+            android:text="IMSI (Subscriber ID):"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_below="@id/iccidText"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="50dp"/>
 
         <TextView
-            android:id="@+id/lonResText"
-            android:layout_width="wrap_content"
+            android:id="@+id/operatorNameText"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="@string/lon_res"
+            android:text="Operator Name:"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_below="@id/imsiText"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="50dp"/>
+
+        <TextView
+            android:id="@+id/networkTypeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Network Type:"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:layout_below="@id/operatorNameText"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="50dp"/>
+
+        <TextView
+            android:id="@+id/imeiText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="IMEI (Device ID):"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:layout_below="@id/networkTypeText"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="50dp"/>
+
+        <TextView
+            android:id="@+id/cellIdText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cell ID:"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:layout_below="@id/networkTypeText"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="50dp"/>
+
+        <TextView
+            android:id="@+id/lacText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LAC (Location Area Code):"
+            android:layout_below="@id/cellIdText"
+            android:layout_marginTop="16dp"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:layout_marginStart="50dp"/>
     </LinearLayout>
 
 </RelativeLayout>
